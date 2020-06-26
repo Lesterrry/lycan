@@ -53,7 +53,7 @@ fn main() {
 		let val = token_generate();
 		let mut file = File::create(path).unwrap();
 		write!(&mut file, "{}",val.clone().to_string()).unwrap();
-		println!("{}", val.clone().raw);
+		println!("{}{}", if !raw_out{"Generated token:\r\n"} else {""}, val.clone().raw);
 	}
 	else if matches.is_present("perform"){
 		if matches.is_present("SEED"){
