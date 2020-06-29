@@ -75,8 +75,11 @@ fn main() {
 			let mut data: String = "".to_string();
 			file.read_to_string(&mut data).expect("No saved tokens or passed inputs");
 			let val = token_decode(&data);
-			if !raw_out {println!("Performing with token created {} days ago:", (get_now() - val.timestamp) / 86400)};
-			println!("{}", token_perform(val));
+			if !raw_out {
+                                println!("Performing with token created {} days ago:", (get_now() - val.timestamp) / 86400);
+                                println!("`{}`", token_perform(val));
+                        }
+                        else {println!("{}", token_perform(val))}
 		}
 	}
 }
