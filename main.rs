@@ -22,7 +22,7 @@ impl Token{
 
 fn main() {
 	let matches = App::new("lycan")
-		.version("0.1.0")
+		.version("0.2.0")
 		.about("2FA Tool")
 		.author("Aydar N.")
 		.arg(Arg::with_name("SEED")
@@ -58,8 +58,11 @@ fn main() {
 	else if matches.is_present("perform"){
 		if matches.is_present("SEED"){
 			let val = token_decode(matches.value_of("SEED").unwrap());
-			if !raw_out {println!("Performing with token created {} days ago:", (get_now() - val.timestamp) / 86400)}
-			println!("{}", token_perform(val));
+			 if !raw_out {
+                                println!("Performing with token created {} days ago:", (get_now() - val.timestamp) / 86400);
+                                println!("`{}`", token_perform(val));
+                        }
+                        else {println!("{}", token_perform(val))}
 		}
 		else{
 			let mut path = PathBuf::new();
