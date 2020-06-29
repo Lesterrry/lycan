@@ -22,7 +22,7 @@ impl Token{
 
 fn main() {
 	let matches = App::new("lycan")
-		.version("0.2.0")
+		.version("0.3.0")
 		.about("2FA Tool")
 		.author("Aydar N.")
 		.arg(Arg::with_name("SEED")
@@ -109,7 +109,7 @@ fn token_perform(token: Token) -> u128{
 	fingerprint = fingerprint.replace("w", &collide(&pusher).to_string());
 	let appender = (token.raw % 10000000000000) % 1000000;
 	fingerprint += &((appender * token.timestamp) / 1000).to_string();
-	return (fingerprint.parse::<u128>().unwrap() * (now % 100) as u128) / (token.timestamp % 1000) as u128;
+	return (fingerprint.parse::<u128>().unwrap() * ((now % 10) + 1) as u128) / (token.timestamp * 100000000) as u128 % (100000) as u128;
 }
 fn collide(input: &[char]) -> i64{
 	let mut out = 0;
